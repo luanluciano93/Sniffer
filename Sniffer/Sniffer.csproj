@@ -4,10 +4,19 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <Authors>AtefR - Marcosvf132</Authors>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BouncyCastle" Version="1.8.9" />
+    <PackageReference Include="Google.Protobuf" Version="3.18.1" />
     <PackageReference Include="HexView.Wpf" Version="0.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +32,10 @@
     <Reference Include="TibiaAPI">
       <HintPath>..\..\..\..\Downloads\TibiaAPI-master\TibiaAPI\bin\Debug\netstandard2.0\TibiaAPI.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icon.ico" />
   </ItemGroup>
 
 </Project>

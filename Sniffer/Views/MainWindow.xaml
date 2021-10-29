@@ -9,27 +9,50 @@
         xmlns:models="clr-namespace:Sniffer.Models" 
         x:Class="Sniffer.Views.MainWindow"
         mc:Ignorable="d"
-        Title="Sniffer" Height="700" Width="600">
+        Title="Sniffer" Height="600" Width="620" MinWidth="619" MinHeight="600" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <ViewModels:MainViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="3" />
-            <RowDefinition Height="200" MinHeight="170" />
+            <RowDefinition Height="120"/>
+            <RowDefinition/>
+            <RowDefinition Height="1.04" />
+            <RowDefinition Height="170" MinHeight="170" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <Label Content="Filter:" Margin="1" />
-            <ComboBox Width="70" Margin="4" SelectedIndex="{Binding SelectedPacketTypeIndex}">
-                <ComboBoxItem Content="Both"/>
-                <ComboBoxItem Content="Client"/>
-                <ComboBoxItem Content="Server"/>
-            </ComboBox>
-            <TextBox Width="100" Text="{Binding FilterOpCode}" Margin="5" TextAlignment="Center" />
-            <Button Width="70" Margin="5"  Content="Search" Command="{Binding FilterCommand}"/>
-            <CheckBox Content="AutoScroll" Margin="7" Name="autoScroll" />
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Label Content="Client path:" Margin="1" />
+                <TextBox x:Name="TextClientPath" Text="" Margin="5" TextAlignment="Left" Width="445" IsEnabled="False" />
+                <Button x:Name="SelectPatthButton" Width="45" Margin="5" Content="Open" Command="{Binding OpenFile}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Label Content="IP:" Margin="1" />
+                <TextBox x:Name="TextIP" Width="350" Text="https://www.tibia.com/clientservices/loginservice.php" Margin="5" TextAlignment="Left" />
+                <Label Content="Port:" Margin="1" />
+                <TextBox x:Name="TextPort" Width="50" Text="7171" Margin="5" TextAlignment="Center" />
+                <Button Width="70" Margin="5" Content="Connect" Command="{Binding IPCommand}"/>
+                <Button x:Name="ConsoleButton" Width="25" Margin="5" Content="..." Command="{Binding ConsoleCommand}" ToolTip="Error log"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Label Content="Filter:" Margin="1" />
+                <ComboBox Width="70" Margin="4" SelectedIndex="{Binding SelectedPacketTypeIndex}">
+                    <ComboBoxItem Content="Both"/>
+                    <ComboBoxItem Content="Client"/>
+                    <ComboBoxItem Content="Server"/>
+                </ComboBox>
+                <TextBox Width="100" Text="{Binding FilterOpCode}" Margin="5" TextAlignment="Center" />
+                <Button Width="70" Margin="5"  Content="Search" Command="{Binding FilterCommand}"/>
+                <CheckBox Content="AutoScroll" Margin="7" Name="autoScroll" />
+                <Label Content="Tracker:" Margin="1" />
+                <Button x:Name="TrackerToggle" Width="45" Margin="5" Content="Start" Command="{Binding TrackerCommand}"/>
+                <Label x:Name="TrackerStatusText" Content="Not tracking" Margin="1" Opacity="0.55" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Opacity="0.8">
+                <Label Content="Status:" Margin="1" />
+                <Label x:Name="StatusText" Content="Waiting for the package.json file" Margin="1" Opacity="0.75" />
+            </StackPanel>
         </StackPanel>
         <models:ScrollingListView Grid.Row="1" AutoScroll="{Binding ElementName=autoScroll, Path=IsChecked}" x:Name="PacketsList" ItemsSource="{Binding FilteredPackets}" SelectedItem="{Binding SelectedPacket}" SelectionMode="Single">
             <ListView.ContextMenu>
@@ -46,46 +69,9 @@
                 </GridView>
             </ListView.View>
         </models:ScrollingListView>
-        <GridSplitter ResizeDirection="Rows" HorizontalAlignment="Stretch" Grid.Row="2"/>
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Border BorderThickness="0 0 1 0" BorderBrush="Black" Margin="0 5 0 14">
-                <Grid MaxHeight="170" VerticalAlignment="Top" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1.5*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Short: " />
-                    <Label Foreground="#FF0066CC" Grid.Column="2" Content="{Binding ElementName=hexViewer, Path=SelectionStart, StringFormat={}{0:X8}}"/>
-
-                    <Label Content="Int: " Grid.Row="1"/>
-                    <Label Content="0" Foreground="#FF0066CC" Grid.Row="1" Grid.Column="2"/>
-
-                    <Label Content="Long: " Grid.Row="2"/>
-                    <Label Content="" Foreground="#FF0066CC" Grid.Row="2" Grid.Column="2"/>
-
-                    <Label Content="UShort: " Grid.Row="3"/>
-                    <Label Content="0" Foreground="#FF0066CC" Grid.Row="3" Grid.Column="2"/>
-
-                    <Label Content="UInt: " Grid.Row="4"/>
-                    <Label Content="0" Foreground="#FF0066CC" Grid.Row="4" Grid.Column="2"/>
-
-                    <Label Content="ULong: " Grid.Row="5"/>
-                    <Label Content="0" Foreground="#FF0066CC" Grid.Row="5" Grid.Column="2"/>
-                </Grid>
-            </Border>
-            <hv:HexViewer Grid.Column="1" x:Name="hexViewer"
+        <GridSplitter ResizeDirection="Rows" HorizontalAlignment="Stretch" Grid.Row="3" Margin="0,21,0,149"/>
+        <Grid Grid.Row="3" Margin="0,2,0,0">
+            <hv:HexViewer x:Name="hexViewer"
                 DataSource="{Binding ElementName=PacketsList, 
                 Path=SelectedItem.Binary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Columns="{Binding RelativeSource={RelativeSource Self}, Path=MaxVisibleColumns}" ShowAddress="False"/>

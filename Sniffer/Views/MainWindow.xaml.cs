@@ -10,6 +10,8 @@ namespace Sniffer.Views
         public MainWindow()
         {
             InitializeComponent();
+
+            ViewModels.MainViewModel._window = this;
         }
     }
 }
