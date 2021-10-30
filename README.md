@@ -1,7 +1,7 @@
 # Sniffer
 TibiaApi Packet Sniffer only for version 12.72 or higher. (Older protocols may not work as intended)
 
-This program uses [TibiaApi](https://github.com/jo3bingham/TibiaAPI) made by [jo3bingham](https://github.com/jo3bingham), 
+This program uses a edited version of [TibiaApi](https://github.com/marcosvf132/TibiaAPI), edited by [me](https://github.com/marcosvf132/). If you wan't the original version from the author [jo3bingham](https://github.com/jo3bingham) click [here](https://github.com/jo3bingham/TibiaAPI).
 
 This is [my](https://github.com/marcosvf132/) fork of [AtefR](https://github.com/AtefR/Sniffer) repository, check his repository for more informations about the original version.
 
