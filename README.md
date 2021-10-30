@@ -1,3 +1,6 @@
+# Disclaimer
+This sniffer version is still a work in progress and may have bugs. The tracker feature is made to work together with my [Remeres](https://github.com/marcosvf132/remeres-map-editor) version.
+
 # Sniffer
 TibiaApi Packet Sniffer only for version 12.72 or higher. (Older protocols may not work as intended)
 
